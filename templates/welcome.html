@@ -14,8 +14,8 @@
 
   <div class="container-fluid">
    <h3><a class="nav-link" href="/">Spoonfeed.Tax <span class="spinner-grow text-success"></span></a> </h3>
-   {% block hom %} <p style="color: chocolate;">AI for Tax Filing</p> {% endblock %}
-   <p style="text-align:center;"><strong>Note: </strong>We don't save your Data. (This site is under Development Process!)</p>
+   {% block hom %} <p style="color: chocolate;">Self Tax Filing tools</p> {% endblock %}
+   <p style="text-align:center;"><strong>Note: </strong>We don't save your Data. (Features under Development!)</p>
   </div>
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
@@ -98,7 +98,8 @@
         <div class="col-md-12 text-center">
       
       <h3>File your GST Returns✅ in under 10 MINUTES</h3>
-            <h3><center>Refer Resources for more info.</center></h3>
+            <h3><center>Refer Resources for tutorials in gst filing.</center></h3>
+
             </div>
     </div>
         {% endblock %}
@@ -106,10 +107,7 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         
- <img src="{{url_for('static', filename='pic1.jpg')}}" alt="gst tax filing for amazon.in and flipkart sellers" id="responsive1-image" Width=99%%>
-<div class="container-fluid"><br>
-<h1>Currently, this website supports data only for amazon sellers</h1>
-
+ 
 <br>
 </br>
 
@@ -152,7 +150,7 @@
 
   
   
-  <h4>Click on <a class="navbar-brand" href="Home"><button type="button" class="btn btn-danger text-white" > <h3><center>Spoonfeed my Data</center></h3></button></a> and upload your B2C_MTR.</h4>
+  <h4>Click on <a class="navbar-brand" href="Home"><button type="button" class="btn btn-danger text-white" > <h3><center>Spoonfeed my Data</center></h3></button></a> and upload your B2C_MTR & B2B_MTR files.<br></br></h4>
   
   
  
@@ -165,7 +163,7 @@
   
   </div>
   </div>
-  
+  </div>
   
          {% endblock %}
       
@@ -221,7 +219,7 @@ body {
 //Get the button
 var mybutton = document.getElementById("myBtn");
 
-// When the user scrolls down 20px from the top of the document, show the button
+// When the user scrolls down 20px from the top of the page, show the button
 window.onscroll = function() {scrollFunction()};
 function scrollFunction() {
   if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
