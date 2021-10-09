@@ -113,46 +113,8 @@
   </div>
  <br>
 
-<head>
-	<meta charset="UTF-8">
-	<title>Tax Summary</title>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-			{% for item in data.values(): %} 
 
-                                {% for i in range(item) %}
-					['{{ i }}'],
-				
-				{% endfor %}
-                                         
-                             
-              
-                        {% endfor %}
-                         
-        ]);
-
-        var options = {
-          title: 'states to file gst',
-          is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-    </script>
-</head>
-<body>
-	<div style="margin: 10px 0 0 10px;width: 400px">
-		<h3>States wise Tax</h3>
-		
-		<div id="piechart_3d" style="width: 400px; height: 400px;"></div>
-	</div>
-</body>
-<br><br>
+<br>
 <div class="container">
   <h2>Get your detailed GST data. <br> Just Pay 100/- for our coffee.. </h2><br>
 	
