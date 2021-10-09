@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}	
 			    
-  <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#gstin"> <h2>Reveal Your GSTIN Number.</h2></button>
+  <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="gstin"> <h2>Reveal Your GSTIN Number.</h2></button>
   <div id="gstin" class="collapse">
    {% print gstin %}
   </div>
@@ -23,8 +23,8 @@
 	    
 	    <div class="container">
 
-  <button type="button" class="btn btn-danger text-white" data-toggle="collapse" data-target="#demo"> <h2>otal Sales excluding GST.</h2></button>
-  <div id="demo" class="collaps">
+  <button type="button" class="btn btn-danger text-white" data-toggle="collapse" data-target="#demontey"> <h2>Total Sales excluding GST.</h2></button>
+  <div id="demontey" class="collapse">
    {% print totalSale %}
   </div>
 	    
@@ -82,8 +82,8 @@
     <div class="card-body">
       <h4 class="card-title">GST Collected for the Month.</h4>
 	    
-  <button type="button" class="btn btn-danger text-white" data-toggle="collapse" data-target="#demo1"> <h2>Reveal Total GST to be paid.</h2></button>
-  <div id="demo1" class="collapse">
+  <button type="button" class="btn btn-danger text-white" data-toggle="collapse" data-target="#demo34"> <h2>Reveal Total GST to be paid.</h2></button>
+  <div id="demo34" class="collapse">
    {% print totalTax %}
   </div>
 	    
@@ -94,10 +94,6 @@
     </div>
   </div>
   <br>	
-  <br><div class="container p-4 my-3 bg-primary text-light">
-		
-	<h2> {% print "For State wise and step wise Gst details, Complete Payment!" %} </h2></div>
-  <br>
   <br>
 
 
@@ -105,18 +101,22 @@
 
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 <div class=page>
-
+<center>
 {% for table in tables %}
     <h2>{{titles[loop.index]}}</h2>
     {{ table|safe }}
   {% endfor %}
-  </div>
+	</div></center>
  <br>
-
+<div class="container p-4 my-3 bg-primary text-light">
+		
+	<h2> {% print "For State wise and step wise Gst details, Complete Payment!" %} </h2></div>
+  <br>
+  <br>
 
 <br>
 <div class="container">
-  <h2>Get your detailed GST data. <br> Just Pay 100/- for our coffee.. </h2><br>
+  <h2>Get your detailed GST data. <br> Just Pay for our coffee.. </h2><br>
 	
 	<img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-2.svg" alt="gst tax filing for amazon and ecommerce sellers" id="responsive-image" Width=90%>
 
