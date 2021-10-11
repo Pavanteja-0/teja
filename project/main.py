@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, jsonify, redirect, url_fo
 from flask_login import login_required, current_user
 import pandas as pd
 from flask import app
+from flask_share import Share
 import os.path
 import matplotlib.pyplot as plt
 import json
@@ -16,7 +17,7 @@ from project.models import User
 from run import mail, db
 
 
-
+share = Share(app)
     
 @main.route('/predata', methods= ['GET', 'POST'])
 def app_charge():
