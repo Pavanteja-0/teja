@@ -14,21 +14,13 @@
 
   <div class="container-fluid">
    <h3><a class="nav-link" href="/">Spoonfeed.Tax <span class="spinner-grow text-success"></span></a> </h3>
+  
     
-    
-    <head>
-   
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    {{ share.load() }}
-</head>
-<body>
-    
+   {% block hom %} <p style="color: chocolate;">Self Tax Filing tools  {{ share.load() }}
+
+
         {{ share.create(title='Share Us: ', sites='facebook, twitter, google, linkedin', align='right') }}
-</body>
-    
-    
-   {% block hom %} <p style="color: chocolate;">Self Tax Filing tools</p> {% endblock %}
+</p> {% endblock %}
    <p style="text-align:center;"><strong>Note: </strong>We don't save your Data. (Features under Development!)</p>
   </div>
 
