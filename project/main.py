@@ -17,8 +17,6 @@ from project.models import User
 from run import mail, db
 
 
-share = Share(app)
-    
 @main.route('/predata', methods= ['GET', 'POST'])
 def app_charge():
     if request.method == "POST":
