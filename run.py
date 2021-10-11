@@ -3,6 +3,9 @@ from flask import Flask, app
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Message, Mail
+from flask_share import Share
+share = Share()
+
 db = SQLAlchemy()
 mail = Mail()
 
@@ -22,6 +25,7 @@ def create_app():
     app.config["MAIL_PASSWORD"] = 'abyqaklzhesxzrmi'
 
     mail.init_app(app)
+    share.init_app(app)
 
 # init SQLAlchemy so we can use it later in our models
     
