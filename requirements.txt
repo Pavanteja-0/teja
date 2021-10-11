@@ -36,3 +36,4 @@ Flask-Charts
 flask-mail
 email_validator
 jsonpickle
+flask-share
