@@ -14,6 +14,20 @@
 
   <div class="container-fluid">
    <h3><a class="nav-link" href="/">Spoonfeed.Tax <span class="spinner-grow text-success"></span></a> </h3>
+    
+    
+    <head>
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h3>Spread Us to another Amazon Seller!</h3>
+    {{ share.load() }}
+</head>
+<body>
+    
+        {{ share.create(title='Share with: ', sites='facebook, twitter, google, linkedin', align='right') }}
+</body>
+    
+    
    {% block hom %} <p style="color: chocolate;">Self Tax Filing tools</p> {% endblock %}
    <p style="text-align:center;"><strong>Note: </strong>We don't save your Data. (Features under Development!)</p>
   </div>
@@ -242,16 +256,7 @@ function topFunction() {
 
 {% block mom %}
 
-<head>
-   
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h3>Spread Us to another Amazon Seller!</h3>
-    {{ share.load() }}
-</head>
-<body>
-    
-        {{ share.create(title='Share with: ', sites='facebook, twitter, google, linkedin') }}
-</body>
+
 
 
 
@@ -290,7 +295,7 @@ function topFunction() {
 
   <!-- Copyright -->
   <div class="footer">© 2021 Copyright:
-    <a href="https://spoonfeedgst.herokuapp.com/"> spoonfeedtax.cloud</a>
+    <a href="https://spoonfeedtax.cloud/"> spoonfeedtax.cloud</a>
   </div>
   <!-- Copyright -->
 
