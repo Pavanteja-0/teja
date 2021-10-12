@@ -37,3 +37,4 @@ flask-mail
 email_validator
 jsonpickle
 flask-share
+Flask-GoogleLogin
