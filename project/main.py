@@ -16,6 +16,10 @@ razorpay_client = razorpay.Client(auth=("rzp_test_eTLJcDvEJdeU2G", "a2TS4HG8wpO8
 from project.models import User
 from run import mail, db
 
+# Instantiate a new client
+import stream
+client = stream.connect('9b6z8ah5rd9z', '7bqp9p849zxrbm6576cuy5ta4gdn9pddzm6yb36jghae84d7qdqts5tspjeha689', location='us-east')
+# Find our API keys here https://getstream.io/dashboard/
 
 @main.route('/predata', methods= ['GET', 'POST'])
 def app_charge():
