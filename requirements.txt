@@ -38,3 +38,6 @@ email_validator
 jsonpickle
 flask-share
 stream-python
+oauthlib
+requests
+pyOpenSSL
