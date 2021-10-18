@@ -50,6 +50,7 @@ def Resources():
 
 
 @main.route('/Contact_Us', methods=['GET', 'POST'])
+@login_is_required
 def Contact_Us():
     form = ContactForm()
     if request.method == 'POST':
