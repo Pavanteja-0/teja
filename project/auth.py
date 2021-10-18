@@ -40,7 +40,7 @@ def login_is_required(function):
 def login():
      authorization_url, state = flow.authorization_url()
      session["state"] = state
-     return render_template('authorization_url')
+     return redirect(authorization_url)
 
 
 
