@@ -70,19 +70,13 @@ def callback():
 
 
 
-
-@auth.route('/signup')
-def signup():
-     return render_template('signup.html')
-
-
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
     session.clear()
     return redirect(url_for('main.index'))
-
+'''
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():
@@ -105,7 +99,7 @@ def signup_post():
     db.session.add(new_user)
     db.session.commit()
     return redirect(url_for('auth.login'))     
-'''
+''' '''
 @auth.route('/login', methods=['POST'])
 def login_post():
     # login code goes here
