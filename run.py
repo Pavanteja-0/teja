@@ -1,7 +1,15 @@
 ##     Import Libraries & Modules  ##
-from flask import Flask, app
+from flask import Flask, app, abort, redirect, request
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
+import os
+import pathlib
+from google.oauth2 import id_token
+from google_auth_oauthlib.flow import Flow
+from pip._vendor import cachecontrol
+import google.auth.transport.requests
+
+import requests
 from flask_mail import Message, Mail
 from flask_share import Share
 share = Share()
@@ -11,8 +19,16 @@ mail = Mail()
 
 from flask_login import LoginManager
 
+GOOGLE_CLIENT_ID = "280271850627-md3meg4ndpuib1osb78nnq0iqis60fk3.apps.googleusercontent.com"
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-md3meg4ndpuib1osb78nnq0iqis60fk3.apps.googleusercontent.com (3).json")
 
- 
+flow = Flow.from_client_secrets_file(
+    client_secrets_file=client_secrets_file,
+    scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
+    redirect_uri="http://www.spoonfeedtax.cloud/login/callback"
+)
+
+
 def create_app():
     app = Flask(__name__)
 
