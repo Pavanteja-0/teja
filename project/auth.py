@@ -11,13 +11,13 @@ import os
 import pathlib
 
 
-GOOGLE_CLIENT_ID = "280271850627-md3meg4ndpuib1osb78nnq0iqis60fk3.apps.googleusercontent.com"
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-md3meg4ndpuib1osb78nnq0iqis60fk3.apps.googleusercontent.com (3).json")
+GOOGLE_CLIENT_ID = "280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com"
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com.json")
 
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="http://www.spoonfeedtax.cloud/login/callback"
+    redirect_uri="https://developmentspoonfeed.herokuapp.com/callback"
 )
 
 
@@ -44,7 +44,7 @@ def login():
 
 
 
-@app.route("/login/callback")
+@auth.route("/callback")
 def callback():
     flow.fetch_token(authorization_response=request.url)
 
