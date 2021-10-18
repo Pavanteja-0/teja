@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import json
 import razorpay
 from project.forms import ContactForm
+from project.auth import login_is_required
 from flask_mail import Message, Mail
 main = Blueprint('main', __name__)
 
