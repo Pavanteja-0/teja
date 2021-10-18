@@ -73,7 +73,7 @@ def Contact_Us():
 
 
 @main.route('/profile', methods=['GET', 'POST'])
-@login_required
+@login_is_required
 def profile():
    user= current_user
    if user:
@@ -90,7 +90,7 @@ def profile():
 
 
 @main.route('/Home', methods=['GET'])
-@login_required
+@login_is_required
 def welcome_page():
     return render_template("welcome_page.html")
 
@@ -98,7 +98,7 @@ def welcome_page():
 
 
 @main.route('/Home', methods=['GET', 'POST'])
-@login_required
+@login_is_required
 def upload_file():
     b2bfile = request.files['ab']
     if len(b2bfile.filename) >= 2 :
