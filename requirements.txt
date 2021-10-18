@@ -44,7 +44,6 @@ pyOpenSSL
 cachetools==4.2.1
 certifi==2020.12.5
 chardet==4.0.0
-click==7.1.2
 google-auth==1.27.0
 google-auth-oauthlib==0.4.2
 idna==2.10
