@@ -9,6 +9,7 @@ from pip._vendor import cachecontrol
 import google.auth.transport.requests
 import os
 import pathlib
+import requests
 
 
 GOOGLE_CLIENT_ID = "280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com"
