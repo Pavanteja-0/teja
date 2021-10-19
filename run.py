@@ -1,7 +1,22 @@
 ##     Import Libraries & Modules  ##
-from flask import Flask, app
+from flask import Flask, app, abort, redirect, request, session
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
+import os
+import pathlib
+from google.oauth2 import id_token
+from google_auth_oauthlib.flow import Flow
+from pip._vendor import cachecontrol
+import google.auth.transport.requests
+from flask_login import (LoginManager, UserMixin,
+                         current_user, login_user, logout_user)
+from flask_dance.consumer import oauth_authorized
+from flask_dance.contrib.google import make_google_blueprint, google
+from flask_dance.consumer.storage.sqla import (OAuthConsumerMixin,
+                                               SQLAlchemyStorage)
+
+
+import requests
 from flask_mail import Message, Mail
 from flask_share import Share
 share = Share()
@@ -9,10 +24,31 @@ share = Share()
 db = SQLAlchemy()
 mail = Mail()
 
-from flask_login import LoginManager
+GOOGLE_CLIENT_ID = "280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com"
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com (1).json")
 
 
- 
+flow = Flow.from_client_secrets_file(
+    client_secrets_file=client_secrets_file,
+    scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
+    redirect_uri="https://developmentspoonfeed.herokuapp.com/google/authorized"
+)
+
+    
+class User(db.Model, UserMixin):
+    id = db.Column(db.String(256), primary_key=True)
+    email = db.Column(db.String(256), unique=True)
+    name = db.Column(db.String(256))
+
+'''
+class OAuth(OAuthConsumerMixin, db.Model):
+    provider_user_id = db.Column(db.String(256), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship(User)
+
+'''
+
+
 def create_app():
     app = Flask(__name__)
 
@@ -40,14 +76,58 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
+    login_manager.login_view = 'google.login'
     login_manager.init_app(app)
-
-    from project.models import User
+    
+    
+    
     @login_manager.user_loader
-    def load_user(user_id):
-        # since the user_id is just the primary key of our user table, use it in the query for the user
-        return User.query.get(int(user_id))
+    def load_user(user):
+        user = User(id=session["google_id"],
+                   name=session["name"])
+        return user
 
-
+    
+    
     return app
+
+
+    google_blueprint = make_google_blueprint(
+        client_id=GOOGLE_CLIENT_ID,
+        client_secret=client_secrets_file,
+        scope=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
+        offline=False,
+        reprompt_consent=True,
+        storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
+    )
+
+    app.register_blueprint(google_blueprint)
+'''
+    @oauth_authorized.connect_via(google_blueprint)
+    def google_logged_in(blueprint, token):
+        resp = blueprint.session.get('/oauth2/v2/userinfo')
+        user_info = resp.json()
+        user_id = str(user_info['id'])
+        oauth = OAuth.query.filter_by(provider=blueprint.name,
+                                  provider_user_id=user_id).first()
+        if not oauth:
+            oauth = OAuth(provider=blueprint.name,
+                          provider_user_id=user_id,
+                          token=token)
+        else:
+            oauth.token = token
+            db.session.add(oauth)
+            db.session.commit()
+            login_user(oauth.user)
+        if not oauth.user:
+            user = User(email=user_info["email"],
+                        name=user_info["name"])
+            oauth.user = user
+            db.session.add_all([user, oauth])
+            db.session.commit()
+            login_user(user)
+
+        return False
+
+'''
+
