@@ -44,9 +44,8 @@ def login():
 '''authorization_url, state = flow.authorization_url()
      session["state"] = state
 '''
-'''
 
-@auth.route("/callback")
+@auth.route("/google/authorized")
 def callback():
     flow.fetch_token(authorization_response=request.url)
 
@@ -68,7 +67,6 @@ def callback():
     session["name"] = id_info.get("name")
     return redirect("/")
 
-'''
 
 
 @auth.route('/logout')
