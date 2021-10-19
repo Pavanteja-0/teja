@@ -26,8 +26,7 @@ mail = Mail()
 
 GOOGLE_CLIENT_ID = "280271850627-ndbdmb33ep917kbtm9u9frektj577dh8.apps.googleusercontent.com"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-ndbdmb33ep917kbtm9u9frektj577dh8.apps.googleusercontent.com.json")
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
@@ -49,7 +48,7 @@ class OAuth(OAuthConsumerMixin, db.Model):
 
 '''
 
-
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 def create_app():
     app = Flask(__name__)
 
@@ -60,6 +59,8 @@ def create_app():
     app.config["MAIL_USE_SSL"] = True
     app.config["MAIL_USERNAME"] = 'pavanteja14@gmail.com'
     app.config["MAIL_PASSWORD"] = 'abyqaklzhesxzrmi'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
     mail.init_app(app)
     share.init_app(app)
