@@ -87,6 +87,7 @@ def create_app():
 
     
     
+    return app
 
 
     google_blueprint = make_google_blueprint(
@@ -99,7 +100,7 @@ def create_app():
     )
 
     app.register_blueprint(google_blueprint)
-
+'''
     @oauth_authorized.connect_via(google_blueprint)
     def google_logged_in(blueprint, token):
         resp = blueprint.session.get('/oauth2/v2/userinfo')
@@ -126,6 +127,5 @@ def create_app():
 
         return False
 
+'''
 
-
-    return app
