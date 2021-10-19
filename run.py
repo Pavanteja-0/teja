@@ -82,7 +82,10 @@ def create_app():
     
     
     @login_manager.user_loader
-    def load_user(user_id):
+    def load_user(user):
+        user = User(google_id=userinfo['id'],
+                   name=userinfo['name'],
+                   avatar=userinfo['picture'])
         return userinfo['id']
 
     
