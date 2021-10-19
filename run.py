@@ -68,7 +68,7 @@ def create_app():
     
     
     
-    class User(db.Model, UserMixin):
+    class User(db, UserMixin):
         id = db.Column(db.Integer, primary_key=True)
         email = db.Column(db.String(256), unique=True)
         name = db.Column(db.String(256))
