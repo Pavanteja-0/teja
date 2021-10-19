@@ -83,7 +83,7 @@ def profile():
        user = User(google_id=userinfo['id'],
                    name=userinfo['name'],
                    avatar=userinfo['picture'])
-   return render_template('profile.html', name=user.name)
+   return render_template('profile.html', name=user.name, avatar=user.avatar)
    
     
 
