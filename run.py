@@ -12,8 +12,8 @@ from flask_login import (LoginManager, UserMixin,
                          current_user, login_user, logout_user)
 from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.google import make_google_blueprint, google
-from flask_dance.consumer.backend.sqla import (OAuthConsumerMixin,
-                                               SQLAlchemyBackend)
+from flask_dance.consumer.storage.sqla import (OAuthConsumerMixin,
+                                               SQLAlchemyStorage)
 
 
 import requests
@@ -94,7 +94,7 @@ google_blueprint = make_google_blueprint(
     scope=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
     offline=False,
     reprompt_consent=True,
-    backend=SQLAlchemyBackend(OAuth, db.session, user=current_user)
+    storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
 )
 
 app.register_blueprint(google_blueprint)
