@@ -67,7 +67,9 @@ def callback():
 
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    login_user()
+    user = User(email=session["google_id"],
+                  name=session["name"])
+    login_user(user)
     return redirect("/")
 
 
