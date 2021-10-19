@@ -77,12 +77,14 @@ def Contact_Us():
 def profile():
    user= current_user
    if user:
-               ### flash message to user.
-        flash('welcome back. Please login(check remember me to have easy access!')
-        return render_template('profile.html', name=current_user.name)
+       user.name = userinfo['name']
+       user.avatar = userinfo['picture']
    else:
-        flash('please login to access everything! ')
-        return redirect(url_for('auth.login')) 
+       user = User(google_id=userinfo['id'],
+                   name=userinfo['name'],
+                   avatar=userinfo['picture'])
+   return render_template('profile.html', name=user.name)
+   
     
 
 
