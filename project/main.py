@@ -51,7 +51,7 @@ def Resources():
 
 
 @main.route('/Contact_Us', methods=['GET', 'POST'])
-@login_is_required
+@login_required
 def Contact_Us():
     form = ContactForm()
     if request.method == 'POST':
@@ -73,7 +73,7 @@ def Contact_Us():
 
 
 @main.route('/profile', methods=['GET', 'POST'])
-@login_is_required
+@login_required
 def profile():
    user= current_user
    if user:
@@ -90,7 +90,7 @@ def profile():
 
 
 @main.route('/Home', methods=['GET'])
-@login_is_required
+@login_required
 def welcome_page():
     return render_template("welcome_page.html")
 
@@ -98,7 +98,7 @@ def welcome_page():
 
 
 @main.route('/Home', methods=['GET', 'POST'])
-@login_is_required
+@login_required
 def upload_file():
     b2bfile = request.files['ab']
     if len(b2bfile.filename) >= 2 :
