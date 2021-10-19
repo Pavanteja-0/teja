@@ -77,12 +77,12 @@ def Contact_Us():
 def profile():
    user= current_user
    if user:
-       user.name = userinfo['name']
-       user.avatar = userinfo['picture']
+       user.name = session["name"]
+       user.avatar = session["avatar"]
    else:
        user = User(google_id=userinfo['id'],
-                   name=userinfo['name'],
-                   avatar=userinfo['picture'])
+                   name=session["name"],
+                   avatar=session["avatar"])
    return render_template('profile.html', name=user.name, avatar=user.avatar)
    
     
