@@ -12,12 +12,12 @@ import requests
 
 
 GOOGLE_CLIENT_ID = "280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com"
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com.json")
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com")
 
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="https://developmentspoonfeed.herokuapp.com/callback"
+    redirect_uri="https://developmentspoonfeed.herokuapp.com/google/authorized"
 )
 
 
