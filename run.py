@@ -40,13 +40,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(256), unique=True)
     name = db.Column(db.String(256))
 
-
+'''
 class OAuth(OAuthConsumerMixin, db.Model):
     provider_user_id = db.Column(db.String(256), unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
 
-
+'''
 
 
 def create_app():
@@ -83,7 +83,7 @@ def create_app():
     
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(int(user_id))
+        return User.query.get(user_id)
 
     
     
