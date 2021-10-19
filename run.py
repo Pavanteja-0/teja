@@ -88,42 +88,42 @@ def create_app():
     
 
 
-google_blueprint = make_google_blueprint(
-    client_id=GOOGLE_CLIENT_ID,
-    client_secret=client_secrets_file,
-    scope=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    offline=False,
-    reprompt_consent=True,
-    storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
-)
+    google_blueprint = make_google_blueprint(
+        client_id=GOOGLE_CLIENT_ID,
+        client_secret=client_secrets_file,
+        scope=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
+        offline=False,
+        reprompt_consent=True,
+        storage=SQLAlchemyStorage(OAuth, db.session, user=current_user)
+    )
 
-app.register_blueprint(google_blueprint)
+    app.register_blueprint(google_blueprint)
 
-@oauth_authorized.connect_via(google_blueprint)
-def google_logged_in(blueprint, token):
-    resp = blueprint.session.get('/oauth2/v2/userinfo')
-    user_info = resp.json()
-    user_id = str(user_info['id'])
-    oauth = OAuth.query.filter_by(provider=blueprint.name,
+    @oauth_authorized.connect_via(google_blueprint)
+    def google_logged_in(blueprint, token):
+        resp = blueprint.session.get('/oauth2/v2/userinfo')
+        user_info = resp.json()
+        user_id = str(user_info['id'])
+        oauth = OAuth.query.filter_by(provider=blueprint.name,
                                   provider_user_id=user_id).first()
-    if not oauth:
-        oauth = OAuth(provider=blueprint.name,
-                      provider_user_id=user_id,
-                      token=token)
-    else:
-        oauth.token = token
-        db.session.add(oauth)
-        db.session.commit()
-        login_user(oauth.user)
-    if not oauth.user:
-        user = User(email=user_info["email"],
-                    name=user_info["name"])
-        oauth.user = user
-        db.session.add_all([user, oauth])
-        db.session.commit()
-        login_user(user)
+        if not oauth:
+            oauth = OAuth(provider=blueprint.name,
+                          provider_user_id=user_id,
+                          token=token)
+        else:
+            oauth.token = token
+            db.session.add(oauth)
+            db.session.commit()
+            login_user(oauth.user)
+        if not oauth.user:
+            user = User(email=user_info["email"],
+                        name=user_info["name"])
+            oauth.user = user
+            db.session.add_all([user, oauth])
+            db.session.commit()
+            login_user(user)
 
-    return False
+        return False
 
 
 
