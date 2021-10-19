@@ -34,6 +34,20 @@ flow = Flow.from_client_secrets_file(
     redirect_uri="https://developmentspoonfeed.herokuapp.com/callback"
 )
 
+    
+class User(db, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(256), unique=True)
+    name = db.Column(db.String(256))
+
+
+class OAuth(OAuthConsumerMixin, db.Model):
+    provider_user_id = db.Column(db.String(256), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship(User)
+
+
+
 
 def create_app():
     app = Flask(__name__)
@@ -67,19 +81,6 @@ def create_app():
     
     
     
-    
-    class User(db, UserMixin):
-        id = db.Column(db.Integer, primary_key=True)
-        email = db.Column(db.String(256), unique=True)
-        name = db.Column(db.String(256))
-
-
-    class OAuth(OAuthConsumerMixin, db.Model):
-        provider_user_id = db.Column(db.String(256), unique=True)
-        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-        user = db.relationship(User)
-
-
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
