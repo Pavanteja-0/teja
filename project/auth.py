@@ -38,11 +38,9 @@ def login_is_required(function):
 
 @auth.route('/login')
 def login():
-    '''
-     authorization_url, state = flow.authorization_url()
-     session["state"] = state'''
      return redirect(authorization_url)
-
+ '''authorization_url, state = flow.authorization_url()
+     session["state"] = state'''
 '''
 
 @auth.route("/callback")
