@@ -86,7 +86,7 @@ def create_app():
         user = User(google_id=userinfo['id'],
                    name=userinfo['name'],
                    avatar=userinfo['picture'])
-        return userinfo['id']
+        return user
 
     
     
