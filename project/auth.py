@@ -67,7 +67,7 @@ def callback():
 
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    session["avatar"] = id_info.get("avatar")
+    session["avatar"] = id_info.get("profile_picture")
     user = User(email=session["google_id"],
                   name=session["name"],
                   avatar=session["avatar"])
