@@ -84,7 +84,7 @@ def create_app():
     @login_manager.user_loader
     def load_user(user):
         user = User(id=session["google_id"],
-                   name=session["name"])
+                    name=session["name"])
         return user
 
     
