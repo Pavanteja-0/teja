@@ -78,12 +78,11 @@ def profile():
    user= current_user
    if user:
        user.name = session["name"]
-       user.avatar = session["avatar"]
+    #   user.avatar = session["avatar"]
    else:
        user = User(google_id=userinfo['id'],
-                   name=session["name"],
-                   avatar=session["avatar"])
-   return render_template('profile.html', name=user.name, avatar=user.avatar)
+                   name=session["name"])
+   return render_template('profile.html', name=user.name)
    
     
 
