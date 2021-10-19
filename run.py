@@ -8,6 +8,13 @@ from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
+from flask_login import (LoginManager, UserMixin,
+                         current_user, login_user, logout_user)
+from flask_dance.consumer import oauth_authorized
+from flask_dance.contrib.google import make_google_blueprint, google
+from flask_dance.consumer.backend.sqla import (OAuthConsumerMixin,
+                                               SQLAlchemyBackend)
+
 
 import requests
 from flask_mail import Message, Mail
@@ -16,8 +23,6 @@ share = Share()
 
 db = SQLAlchemy()
 mail = Mail()
-
-from flask_login import LoginManager
 
 GOOGLE_CLIENT_ID = "280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com.json")
@@ -61,13 +66,26 @@ def create_app():
     
     
     
+    
+    class User(db.Model, UserMixin):
+        id = db.Column(db.Integer, primary_key=True)
+        email = db.Column(db.String(256), unique=True)
+        name = db.Column(db.String(256))
+
+
+    class OAuth(OAuthConsumerMixin, db.Model):
+        provider_user_id = db.Column(db.String(256), unique=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+        user = db.relationship(User)
+
 
     @login_manager.user_loader
     def load_user(user_id):
-        # since the user_id is just the primary key of our user table, use it in the query for the user
-        
-        user_id = session["google_id"]
-        return user_id
+        return User.query.get(int(user_id))
+
+    
+    
+
 
 
     return app
