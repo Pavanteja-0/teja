@@ -25,8 +25,7 @@ db = SQLAlchemy()
 mail = Mail()
 
 GOOGLE_CLIENT_ID = "280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com"
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com (1).json
-")
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret_280271850627-sd8php857k66pvd224643lk56ksu67kc.apps.googleusercontent.com (1).json")
 
 
 flow = Flow.from_client_secrets_file(
