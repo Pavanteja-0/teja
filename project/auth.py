@@ -42,7 +42,7 @@ def login():
      session["state"] = state
      return redirect(authorization_url)
 
-
+'''
 
 @auth.route("/callback")
 def callback():
@@ -66,7 +66,7 @@ def callback():
     session["name"] = id_info.get("name")
     return redirect("/")
 
-
+'''
 
 
 @auth.route('/logout')
