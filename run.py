@@ -78,7 +78,7 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     login_manager = LoginManager()
-    login_manager.login_view = 'google.login'
+    login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
     
     
