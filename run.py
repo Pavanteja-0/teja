@@ -60,6 +60,7 @@ def create_app():
     app.config["MAIL_USERNAME"] = 'pavanteja14@gmail.com'
     app.config["MAIL_PASSWORD"] = 'abyqaklzhesxzrmi'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=30)
 
 
     mail.init_app(app)
